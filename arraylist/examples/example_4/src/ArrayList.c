@@ -100,10 +100,10 @@ int al_deleteArrayList(ArrayList* this)
     int returnAux = -1;
 
         if (this != NULL)
-    {
-        free(this);
-        returnAux = 0;
-    }
+        {
+            free(this);
+            returnAux = 0;
+        }
 
     return returnAux;
 }
@@ -188,7 +188,7 @@ int al_set(ArrayList* this, int index,void* pElement)
     int flag = 1;
     int i;
 
-    if(this != NULL && pElement != NULL && index >=0 && index < this->size+1 )
+    if(this != NULL && pElement != NULL && index >= 0 && index < this->size )
     {
         if(this->size+1 > this->reservedSize)
         {
@@ -219,6 +219,23 @@ int al_set(ArrayList* this, int index,void* pElement)
 int al_remove(ArrayList* this,int index)
 {
     int returnAux = -1;
+    int flag = 1;
+    int i;
+
+    if(this != NULL)
+    {
+        if(index >=0 && index < this->size)
+        {
+         for(i = index ; i > this->size; i++ )
+            {
+               this->pElements[i] = this->pElements[i+1];
+            }
+
+        free(this->pElements[this->size-1]);
+        this->size--;
+        returnAux = 0;
+        }
+    }
 
     return returnAux;
 }
@@ -233,6 +250,13 @@ int al_remove(ArrayList* this,int index)
 int al_clear(ArrayList* this)
 {
     int returnAux = -1;
+
+    if (this != NULL)
+        {
+            calloc(sizeof(this->size), this->pElements);
+            this->size=0;
+            returnAux = 0;
+        }
 
     return returnAux;
 }
