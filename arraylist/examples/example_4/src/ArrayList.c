@@ -99,6 +99,12 @@ int al_deleteArrayList(ArrayList* this)
 {
     int returnAux = -1;
 
+        if (this != NULL)
+    {
+        free(this);
+        returnAux = 0;
+    }
+
     return returnAux;
 }
 
@@ -110,6 +116,11 @@ int al_deleteArrayList(ArrayList* this)
 int al_len(ArrayList* this)
 {
     int returnAux = -1;
+
+    if (this != NULL)
+    {
+        returnAux = this->size;
+    }
 
     return returnAux;
 }
@@ -124,6 +135,11 @@ int al_len(ArrayList* this)
 void* al_get(ArrayList* this, int index)
 {
     void* returnAux = NULL;
+
+    if(this != NULL && index >= 0 && index < this->size)
+    {
+        returnAux = this->pElements[index];
+    }
 
     return returnAux;
 }
@@ -140,6 +156,19 @@ void* al_get(ArrayList* this, int index)
 int al_contains(ArrayList* this, void* pElement)
 {
     int returnAux = -1;
+    int i;
+
+    if(this != NULL && pElement != NULL )
+    {
+         returnAux = 0;
+          for(i=this->size; i>=0; i--)
+            {
+                if(pElement == this->pElements[i])
+                    {
+                        returnAux = 1;
+                    }
+            }
+    }
 
     return returnAux;
 }
@@ -156,6 +185,26 @@ int al_contains(ArrayList* this, void* pElement)
 int al_set(ArrayList* this, int index,void* pElement)
 {
     int returnAux = -1;
+    int flag = 1;
+    int i;
+
+    if(this != NULL && pElement != NULL && index >=0 && index < this->size+1 )
+    {
+        if(this->size+1 > this->reservedSize)
+        {
+            flag = resizeUp(this);
+        }
+        if(flag==1)
+        {
+            for(i=this->size; i>=index; i-- )
+            {
+               this->pElements[i+1] = this->pElements[i];
+            }
+            this->pElements[index] = pElement;
+
+            returnAux = 0;
+        }
+    }
 
     return returnAux;
 }
