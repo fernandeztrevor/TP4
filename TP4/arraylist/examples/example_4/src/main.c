@@ -38,13 +38,13 @@ int main(void)
         //startTesting(8);//al_remove
         //startTesting(9);//al_clear
         //startTesting(10);//al_clone
-        startTesting(11);//al_push
-        /*startTesting(12);
-        startTesting(13);
-        startTesting(14);
-        startTesting(15);
-        startTesting(16);
-        startTesting(17);*/
+        //startTesting(11);//al_push, al 80%
+        //startTesting(12);//al_indexOf
+        //startTesting(13);//al_isEmpty
+        //startTesting(14);//al_pop, al 80%
+        //startTesting(15);//al_sublist, al 80%
+        //startTesting(16);//al_containsAll, al 75%
+        startTesting(17);//al_sort
 
     return 0;
 }
